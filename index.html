@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vibe Learn - 나만의 AI & 개발 학습 포털</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons (CDN) -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="light">
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <span class="logo-icon">🚀</span>
+          <span class="logo-text">Vibe<span>Learn</span></span>
+        </div>
+        <button id="themeToggle" class="theme-toggle-btn" title="테마 변경">
+          <i data-lucide="moon"></i>
+        </button>
+      </div>
+
+      <div class="navigation-title">CHAPTERS</div>
+      
+      <!-- Dynamic Chapters List -->
+      <nav class="nav-menu" id="chaptersList">
+        <!-- Dynamically rendered day items -->
+      </nav>
+
+      <button id="btnAddChapter" class="btn btn-add-chapter">
+        <i data-lucide="plus"></i> 챕터 추가하기
+      </button>
+
+      <div class="sidebar-footer">
+        <p class="footer-title">학습 데이터 관리</p>
+        <div class="backup-actions">
+          <button id="btnExportBackup" class="btn-backup" title="데이터 백업 받기">
+            <i data-lucide="download"></i> 백업 다운로드
+          </button>
+          <button id="btnImportBackup" class="btn-backup" title="데이터 복구하기">
+            <i data-lucide="upload"></i> 백업 불러오기
+          </button>
+          <input type="file" id="importFileInput" accept=".json" style="display: none;">
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Top Actions Bar -->
+      <div class="top-bar">
+        <div class="breadcrumb">
+          <span class="back-link"><i data-lucide="chevron-left"></i> 강의 목록으로</span>
+        </div>
+        <div class="header-actions">
+          <button id="btnEditChapter" class="btn btn-secondary">
+            <i data-lucide="edit-3"></i> 현재 챕터 편집
+          </button>
+          <button id="btnDeleteChapter" class="btn btn-danger">
+            <i data-lucide="trash-2"></i> 삭제
+          </button>
+        </div>
+      </div>
+
+      <!-- Course Content Container -->
+      <article class="lecture-container" id="lectureContent">
+        
+        <!-- Header Section -->
+        <header class="lecture-header">
+          <div class="header-badge" id="lectureBadge">10</div>
+          <div class="header-text">
+            <h1 id="lectureTitle">영상 콘텐츠 자동화 - JSON 프롬프트와 Google Opal 에이전트로 쇼츠/롱폼 제작</h1>
+            <p id="lectureDesc">JSON 프롬프트를 활용하여 고품질 영상을 생성하고, 22개의 Google Opal 에이전트로 자동화된 영상 제작 시스템을 구축하는 방법을 학습합니다.</p>
+            <div class="meta-info">
+              <span class="meta-item"><i data-lucide="clock"></i> <span id="lectureDuration">약 63분</span></span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Learning Goals Card -->
+        <section class="content-card goals-card">
+          <h2 class="card-title"><i data-lucide="book-open"></i> 학습 목표</h2>
+          <ol class="goals-list" id="lectureGoals">
+            <!-- Dynamically populated goals -->
+          </ol>
+        </section>
+
+        <!-- Overview Content Card -->
+        <section class="content-card info-card" id="overviewContainer">
+          <div class="badge-tag">실습</div>
+          <h2 class="card-title">✨ <span id="chapterPrefix">Chapter 10</span>에서 배울 내용</h2>
+          <div class="hero-highlight-box" id="overviewBox">
+            <div class="highlight-icon">🎬</div>
+            <div class="highlight-content">
+              <h3>일관성 있고 이어지는 영상 시리즈 제작</h3>
+              <p>오늘은 Google Opal로 스토리가 자연스럽게 연결되고,<br>같은 스타일과 캐릭터를 유지하는 영상 시리즈를 만드는 방법을 배웁니다!</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Video Demo Card -->
+        <section class="content-card video-card" id="videoContainer">
+          <div class="badge-tag">실습</div>
+          <h2 class="card-title">📹 일관성 있는 영상 시리즈 데모</h2>
+          <p class="card-subtitle">아래 영상을 보시며 같은 스타일로 이어지는 영상이 어떻게 만들어지는지 확인하실 수 있습니다! 🎬</p>
+          
+          <!-- Mock Video Player with premium design -->
+          <div class="video-player-wrapper">
+            <div class="video-embed-box" id="videoPlayerBox">
+              <!-- Dynamically rendered video or fallback mockup -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Core Insights Card -->
+        <section class="content-card insights-card" id="insightsContainer">
+          <h2 class="card-title">⚡ 이 강의에서 배울 핵심 내용</h2>
+          <ul class="insights-list" id="lectureInsights">
+            <!-- Dynamically populated bullet items -->
+          </ul>
+        </section>
+
+        <!-- Workflow Launcher Card -->
+        <section class="content-card workflow-card" id="workflowContainer">
+          <div class="badge-tag">실습</div>
+          <h2 class="card-title">🔗 실습 워크플로우 시작하기</h2>
+          <div class="workflow-box">
+            <div class="workflow-icon">🚀</div>
+            <h3>Google Opal 워크플로우로 영상 자동화 시작!</h3>
+            <p>아래 버튼을 클릭하여 Google Opal에서 영상 자동화 워크플로우를 시작하세요.<br>강의 내용을 따라하면서 직접 에이전트를 구성해보세요!</p>
+            
+            <div class="workflow-link-box">
+              <span class="warning-badge"><i data-lucide="alert-triangle"></i> 워크플로우 오류 시, 아래 링크를 복사하여 새 탭에서 여세요:</span>
+              <input type="text" id="workflowUrlInput" readonly value="https://opal.google/?flow=drive:/1Tsa_QmjOFQXmtnPl8J6mLUnbMkjrOaOB&shared&mode=app">
+            </div>
+
+            <a id="btnLaunchWorkflow" href="#" target="_blank" class="btn btn-primary btn-launch">
+              <i data-lucide="link"></i> Google Opal 워크플로우 열기
+            </a>
+          </div>
+        </section>
+
+        <!-- JSON Code Prompt Card -->
+        <section class="content-card code-card" id="codeContainer">
+          <div class="badge-tag">실습</div>
+          <h2 class="card-title">🍺 실전 JSON 프롬프트</h2>
+          <p class="card-subtitle" id="codeCardDesc">실전에서 바로 사용할 수 있는 고퀄리티 광고 영상 프롬프트입니다. Google Veo, Runway Gen-3, Pika 등에 복사·붙여넣기하여 프로급 영상을 생성하세요!</p>
+          
+          <div class="code-block-wrapper">
+            <div class="code-header">
+              <span><i data-lucide="file-code"></i> JSON 프롬프트</span>
+              <button id="btnCopyCode" class="btn-copy">
+                <i data-lucide="copy"></i> 복사하기
+              </button>
+            </div>
+            <pre class="code-pre"><code id="codeBlockContent"></code></pre>
+          </div>
+        </section>
+
+      </article>
+    </main>
+  </div>
+
+  <!-- Chapter Editor Modal -->
+  <div class="modal" id="chapterModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitleText">챕터 추가 / 편집</h2>
+        <button class="modal-close" id="btnModalClose">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="chapterForm">
+          <input type="hidden" id="editChapterId">
+
+          <div class="form-row">
+            <div class="form-group col-4">
+              <label for="formNum">챕터 번호 (배지)</label>
+              <input type="number" id="formNum" required min="1" placeholder="10">
+            </div>
+            <div class="form-group col-8">
+              <label for="formDuration">소요 시간</label>
+              <input type="text" id="formDuration" placeholder="예: 약 60분" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="formTitle">대제목</label>
+            <input type="text" id="formTitle" required placeholder="영상 콘텐츠 자동화 - JSON 프롬프트 제작">
+          </div>
+
+          <div class="form-group">
+            <label for="formDesc">부제목 / 설명</label>
+            <textarea id="formDesc" rows="2" required placeholder="챕터에 대한 핵심 설명을 적어주세요."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="formGoals">학습 목표 (한 줄에 하나씩 입력)</label>
+            <textarea id="formGoals" rows="4" required placeholder="1. JSON 프롬프트 활용법 이해&#10;2. 에이전트 설계 방법"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="formOverviewTitle">배울 내용 요약 제목</label>
+            <input type="text" id="formOverviewTitle" required placeholder="일관성 있고 이어지는 영상 시리즈 제작">
+          </div>
+
+          <div class="form-group">
+            <label for="formOverviewText">배울 내용 요약 설명</label>
+            <textarea id="formOverviewText" rows="3" required placeholder="Google Opal로 스토리가 자연스럽게 연결되는 영상 시리즈를 만드는 방법을 배웁니다!"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="formVideoUrl">동영상 임베드 URL (선택)</label>
+            <input type="text" id="formVideoUrl" placeholder="예: https://www.youtube.com/embed/... 혹은 동영상 URL">
+          </div>
+
+          <div class="form-group">
+            <label for="formInsights">핵심 배울 내용 (한 줄에 하나씩 입력)</label>
+            <textarea id="formInsights" rows="4" required placeholder="JSON 프롬프트 구조: 카메라, 조명 제어&#10;22개 에이전트 시스템 구축"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="formWorkflowUrl">워크플로우 링크 (선택)</label>
+            <input type="text" id="formWorkflowUrl" placeholder="예: https://opal.google/?flow=...">
+          </div>
+
+          <div class="form-group">
+            <label for="formCode">실전 코드 / JSON 프롬프트 (선택)</label>
+            <textarea id="formCode" rows="6" class="code-textarea" placeholder="JSON 코드 혹은 텍스트 프롬프트를 입력하세요."></textarea>
+          </div>
+
+          <div class="modal-footer-actions">
+            <button type="button" class="btn btn-secondary" id="btnCancelModal">취소</button>
+            <button type="submit" class="btn btn-primary">저장하기</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>
