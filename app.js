@@ -28,6 +28,30 @@ const seedChapters = [
     ],
     workflowUrl: "https://opal.google/?flow=drive:/1Tsa_QmjOFQXmtnPl8J6mLUnbMkjrOaOB&shared&mode=app",
     code: `{\n  "title": "Rise, lights string themselves, speakers assemble into air, sand shifts into a dance floor, a DJ booth builds from driftwood. Music kicks in. A beach rave is born. No text.",\n  "style": "cinematic, magical realism",\n  "camera": "starts ultra close, zooms out and cranes overhead as the world expands",\n  "lighting": "sunset turning to neon-golden hour into party glow",\n  "environment": "quiet beach transforms into high-energy beach rave",\n  "elements": [\n    "Corona bottle (label visible, condensation dripping)",\n    "pop-top cap in slow motion",\n    "exploding citrus slice",\n    "sand morphing into dance floor",\n    "palm trees rising",\n    "neon lights snapping on",\n    "DJ booth building itself",\n    "crowd materializing mid-dance",\n    "surfboards as signage"\n  ]\n}`
+  },
+  {
+    id: "chapter-11",
+    num: 11,
+    title: "Vibe Learn 프로젝트 개발 회고 및 기획 기록",
+    desc: "Vibe Learn 포털의 최초 기획 의도와 기술적 구현 과정, 그리고 향후 성능 및 편의성 관점에서 보완해야 할 점들을 투명하게 기록합니다.",
+    duration: "약 45분",
+    goals: [
+      "Vibe Learn 학습/개발 일지 포털의 기획 의도 분석",
+      "PWA 연동 및 모바일 반응형 레이아웃 설계 과정 이해",
+      "기술적 부채 식별 및 우선순위 개선 과제 정의"
+    ],
+    overviewTitle: "기획 의도 (Why) & 프로젝트 가치",
+    overviewText: "■ 기획 의도 (Why)\n- 나만의 개발 과정과 AI 학습 일지를 한눈에 볼 수 있는 깔끔한 대시보드를 구축합니다.\n- 깃허브 아카이브와 즉시 연동하여 기록의 영속성을 보장합니다.\n- PC뿐만 아니라 모바일에서도 Native 앱처럼 빠르게 설치하여 접근할 수 있는 도구를 만듭니다.",
+    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", 
+    insights: [
+      "진행 과정: localStorage 데이터 CRUD 설계 완료",
+      "진행 과정: 가로 스와이프 가능한 모바일 뷰 최적화 (CSS media query)",
+      "진행 과정: manifest.json 및 sw.js 탑재를 통한 PWA 지원",
+      "보완할 점: 이미지 드래그 앤 드롭 업로드 기능 지원 예정",
+      "보완할 점: GitHub API 연동을 통한 웹 상의 자동 푸시 기능 개발 계획"
+    ],
+    workflowUrl: "https://github.com/aprilbirdhi-star/LudaDevelop-Archive",
+    code: `{\n  "projectName": "Vibe Learn",\n  "status": "v1.0.0-released",\n  "techStack": ["HTML5", "CSS3 (Variables, Media Queries)", "Vanilla JS", "Lucide Icons", "PWA"],\n  "retro": {\n    "planning": "기획 의도를 챕터별 카드 및 배울 내용 하이라이트 박스로 완벽 투영",\n    "challenges": "모바일 고정 사이드바 겹침 현상을 가로 스크롤 탑바로 우아하게 극복",\n    "nextSteps": [\n      "자동 GitHub 커밋 연동 기능",\n      "마크다운 파서 연동으로 코드 가독성 향상"\n    ]\n  }\n}`
   }
 ];
 
@@ -98,8 +122,27 @@ function loadData() {
   const stored = localStorage.getItem("vibe_learn_chapters");
   if (stored) {
     chapters = JSON.parse(stored);
+    
+    // Check if new seed chapters are missing, if so add them
+    let updated = false;
+    seedChapters.forEach(seed => {
+      if (!chapters.some(ch => ch.id === seed.id)) {
+        chapters.push(seed);
+        updated = true;
+      }
+    });
+    
+    if (updated) {
+      saveData();
+    }
+    
     if (chapters.length > 0) {
-      activeChapterId = chapters[0].id;
+      chapters.sort((a, b) => a.num - b.num);
+      // Keep selected chapter or default to first
+      const hasActive = chapters.some(c => c.id === activeChapterId);
+      if (!hasActive) {
+        activeChapterId = chapters[0].id;
+      }
     }
   } else {
     // Seed Default Data
