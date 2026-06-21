@@ -1,0 +1,21 @@
+{
+  "short_name": "VibeLearn",
+  "name": "Vibe Learn - 나만의 AI & 개발 학습 포털",
+  "icons": [
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#f5f7fb",
+  "theme_color": "#0066cc",
+  "display": "standalone",
+  "orientation": "portrait"
+}
